@@ -1,5 +1,7 @@
 # O próximo treino
 
+Sistema de recomendação da próxima modalidade de atividade física, a partir do histórico de sessões.
+
 Universidade Presbiteriana Mackenzie  
 Faculdade de Computação e Informática  
 Curso de Banco de Dados — 2026.2  
@@ -8,9 +10,9 @@ Professor orientador: Gustavo Scalabrini Sampaio
 
 ## Objetivo
 
-Ranquear a próxima modalidade de atividade física a partir do histórico de sessões de uma pessoa, e medir se uma vizinhança de itens supera a lista global e a repetição da modalidade mais frequente dessa pessoa.
+Ranquear a próxima modalidade de uma pessoa e medir se uma vizinhança de itens supera a lista global e a repetição da modalidade que essa pessoa mais fez.
 
-A base é o recorte filtrado do FitRec (Endomondo), de Ni, Muhlstein e McAuley (WWW 2019). Uso acadêmico. O arquivo não é redistribuído neste repositório.
+A base é o recorte filtrado do FitRec (Endomondo), de Ni, Muhlstein e McAuley (WWW 2019). O uso é acadêmico. O arquivo de cerca de 4,9 GB não está neste repositório e não pode ser redistribuído.
 
 Página da base: https://cseweb.ucsd.edu/~jmcauley/datasets/fitrec.html
 
@@ -25,20 +27,31 @@ Página da base: https://cseweb.ucsd.edu/~jmcauley/datasets/fitrec.html
 
 ## Pastas
 
+| Pasta | O que tem |
+|---|---|
+| `docs/etapa-1/` | Documento da etapa 1 e o desenho do pipeline |
+| `docs/etapa-2/` | Documento da etapa 2 |
+| `docs/etapa-3/` | Documento da etapa 3 |
+| `docs/etapa-4/` | Documento da etapa 4, com resultados e conclusão |
+| `docs/templates/` | Templates oficiais usados na formatação |
+| `src/` | Código que gera as métricas |
+| `resultados/` | Números e figuras citados no documento da etapa 4 |
+| `data/raw/` e `data/processed/` | Vazias de propósito. A base bruta não é versionada |
+
+O documento para leitura da etapa final é `docs/etapa-4/a4-aplicando-conhecimento.docx`.
+
+## Como reproduzir
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 src/fitrec_poc.py
 ```
-docs/templates/   templates oficiais das quatro etapas
-docs/etapa-1/     documentação da etapa 1
-docs/etapa-2/     documentação da etapa 2
-docs/etapa-3/     documentação da etapa 3
-docs/etapa-4/     documentação da etapa 4
-data/raw/         arquivo FitRec, não versionado
-data/processed/   recortes, não versionados
-src/              código da prova de conceito e da reavaliação
-```
+
+A leitura do arquivo remoto leva vários minutos. As métricas já calculadas estão em `resultados/`.
 
 ## Vídeos
 
-Os links do YouTube entram aqui quando forem publicados.
+Os links do YouTube entram nesta seção quando forem publicados.
 
-- Apresentação de cinco minutos: a publicar
-- Aplicação na comunidade: a publicar
+- Apresentação de cinco minutos
+- Aplicação com uma pessoa que treina

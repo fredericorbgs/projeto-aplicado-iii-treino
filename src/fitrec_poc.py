@@ -14,7 +14,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 URL = "https://mcauleylab.ucsd.edu/public_datasets/gdrive/fitrec/endomondoHR_proper.json"
-OUT = Path(__file__).resolve().parent / "a2-poc-stats.json"
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "resultados" / "prova-de-conceito.json"
 TOKEN = re.compile(
     r"'sport': '([^']*)'|'id': (\d+)|'gender': '([^']*)'|'timestamp': \[(\d+)|'userId': (\d+)"
 )
@@ -248,7 +249,8 @@ def main() -> None:
             "combinado": pack(take(combo_ranks)),
         },
     }
-    ajuste_path = Path(__file__).resolve().parent / "a3-ajuste-stats.json"
+    ajuste_path = ROOT / "resultados" / "reavaliacao.json"
+    ajuste_path.parent.mkdir(parents=True, exist_ok=True)
     ajuste_path.write_text(json.dumps(ajuste, ensure_ascii=False, indent=2), encoding="utf-8")
     OUT.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(ajuste, ensure_ascii=False, indent=2))

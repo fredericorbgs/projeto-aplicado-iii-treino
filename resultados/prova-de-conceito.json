@@ -1,0 +1,144 @@
+{
+  "bytes_read": 4929126138,
+  "sessoes": 167783,
+  "usuarios": 1059,
+  "modalidades": 43,
+  "ids_duplicados": 0,
+  "genero": [
+    [
+      "male",
+      156717
+    ],
+    [
+      "female",
+      9881
+    ],
+    [
+      "unknown",
+      1185
+    ]
+  ],
+  "sessoes_por_usuario": {
+    "min": 1,
+    "p25": 36,
+    "mediana": 100,
+    "p75": 223,
+    "max": 1301,
+    "media": 158.4
+  },
+  "top_modalidades": [
+    [
+      "bike",
+      71915
+    ],
+    [
+      "run",
+      70591
+    ],
+    [
+      "mountain bike",
+      10722
+    ],
+    [
+      "bike (transport)",
+      7757
+    ],
+    [
+      "indoor cycling",
+      1725
+    ],
+    [
+      "walk",
+      1289
+    ],
+    [
+      "orienteering",
+      867
+    ],
+    [
+      "cross-country skiing",
+      789
+    ],
+    [
+      "core stability training",
+      448
+    ],
+    [
+      "fitness walking",
+      292
+    ],
+    [
+      "skate",
+      271
+    ],
+    [
+      "roller skiing",
+      238
+    ]
+  ],
+  "piso_10": {
+    "usuarios": 956,
+    "sessoes": 167373,
+    "modalidades_no_treino": 42
+  },
+  "avaliacao": {
+    "5": {
+      "vizinhanca_itens": {
+        "n": 956,
+        "precision": 0.1964,
+        "recall": 0.9822,
+        "ndcg": 0.8973,
+        "random_precision": 0.0238,
+        "random_recall": 0.119,
+        "random_ndcg": 0.0702
+      },
+      "popularidade": {
+        "n": 956,
+        "precision": 0.1941,
+        "recall": 0.9707,
+        "ndcg": 0.738,
+        "random_precision": 0.0238,
+        "random_recall": 0.119,
+        "random_ndcg": 0.0702
+      },
+      "habito": {
+        "n": 956,
+        "precision": 0.2,
+        "recall": 1.0,
+        "ndcg": 0.9096,
+        "random_precision": 0.0238,
+        "random_recall": 0.119,
+        "random_ndcg": 0.0702
+      }
+    },
+    "10": {
+      "vizinhanca_itens": {
+        "n": 956,
+        "precision": 0.0994,
+        "recall": 0.9937,
+        "ndcg": 0.9012,
+        "random_precision": 0.0238,
+        "random_recall": 0.2381,
+        "random_ndcg": 0.1082
+      },
+      "popularidade": {
+        "n": 956,
+        "precision": 0.0992,
+        "recall": 0.9916,
+        "ndcg": 0.7448,
+        "random_precision": 0.0238,
+        "random_recall": 0.2381,
+        "random_ndcg": 0.1082
+      },
+      "habito": {
+        "n": 956,
+        "precision": 0.1,
+        "recall": 1.0,
+        "ndcg": 0.9096,
+        "random_precision": 0.0238,
+        "random_recall": 0.2381,
+        "random_ndcg": 0.1082
+      }
+    }
+  }
+}
