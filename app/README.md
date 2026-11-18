@@ -1,6 +1,6 @@
 # Demonstração local
 
-Página para mostrar o recomendador a quem treina. Abra `index.html` no navegador, com duplo clique. Não precisa de servidor nem de internet.
+Página para mostrar o recomendador a quem treina. Online em https://fredericorbgs.github.io/projeto-aplicado-iii-treino/app/. Sem internet, abra `index.html` no navegador, com duplo clique.
 
 A pessoa toca nas modalidades das últimas sessões e vê, a cada toque, as quatro listas avaliadas no documento: hábito, vizinhança de itens, soma do hábito com a vizinhança e popularidade. O campo "Qual foi o treino seguinte?" mostra em que posição de cada lista estava a sessão que ela fez de fato.
 

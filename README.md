@@ -8,6 +8,16 @@ Curso de Banco de Dados — 2026.2
 Disciplina: Projeto Aplicado III  
 Professor orientador: Gustavo Scalabrini Sampaio
 
+## Entrega final
+
+| | Link |
+|---|---|
+| Vídeo de apresentação | https://youtu.be/LI8NvARRv4s |
+| Vídeo da aplicação na comunidade | https://youtu.be/TyZ9lBCS5rE |
+| Demonstração online | https://fredericorbgs.github.io/projeto-aplicado-iii-treino/app/ |
+| Documento da etapa 4 | [`docs/etapa-4/a4-aplicando-conhecimento.docx`](docs/etapa-4/a4-aplicando-conhecimento.docx) |
+| Slides da apresentação | [`docs/etapa-4/a4-slides-apresentacao.pdf`](docs/etapa-4/a4-slides-apresentacao.pdf) |
+
 ## Objetivo
 
 Ranquear a próxima modalidade de uma pessoa e medir se uma vizinhança de itens supera a lista global e a repetição da modalidade que essa pessoa mais fez.
@@ -32,7 +42,8 @@ Página da base: https://cseweb.ucsd.edu/~jmcauley/datasets/fitrec.html
 | `docs/etapa-1/` | Documento da etapa 1 e o desenho do pipeline |
 | `docs/etapa-2/` | Documento da etapa 2 |
 | `docs/etapa-3/` | Documento da etapa 3 |
-| `docs/etapa-4/` | Documento da etapa 4, com resultados e conclusão |
+| `docs/etapa-4/` | Documento da etapa 4, com resultados e conclusão, e os slides da apresentação |
+| `docs/etapa-4/videos/` | Cópias dos dois vídeos publicados no YouTube |
 | `docs/templates/` | Templates oficiais usados na formatação |
 | `src/` | Código que gera as métricas e o modelo da demonstração |
 | `app/` | Demonstração local: abra `app/index.html` no navegador |
@@ -52,11 +63,15 @@ A leitura do arquivo remoto leva vários minutos. As métricas já calculadas es
 
 ## Demonstração
 
-Abra `app/index.html` no navegador. A pessoa toca nas modalidades das últimas sessões e vê as quatro listas do documento mudarem a cada toque. Não precisa de servidor. Detalhes em `app/README.md`.
+Online: https://fredericorbgs.github.io/projeto-aplicado-iii-treino/app/
+
+Sem internet, abra `app/index.html` no navegador. A pessoa toca nas modalidades das últimas sessões e vê as quatro listas do documento mudarem a cada toque. Detalhes em `app/README.md`.
 
 ## Vídeos
 
-Os links do YouTube entram nesta seção quando forem publicados.
+| Vídeo | YouTube | Cópia no repositório |
+|---|---|---|
+| Apresentação, com os quatro integrantes | https://youtu.be/LI8NvARRv4s | `docs/etapa-4/videos/apresentacao.mp4` |
+| Aplicação na comunidade | https://youtu.be/TyZ9lBCS5rE | `docs/etapa-4/videos/aplicacao-comunidade.mp4` |
 
-- Apresentação de cinco minutos
-- Aplicação com uma pessoa que treina
+No vídeo da aplicação, um integrante do grupo que corre e pedala insere na página uma rotina simulada de quatro semanas e lê as quatro listas. Depois testa a sessão seguinte e uma troca hipotética para musculação.
