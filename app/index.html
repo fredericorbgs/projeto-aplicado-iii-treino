@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>O próximo treino · demonstração</title>
+<style>
+  :root {
+    --navy: #243b48; --slate: #3d5a6c; --steel: #8aa0ab; --warm: #c9c0b4; --paper: #f4f1ec;
+    --ink: #2c2a26; --muted: #6e7f88; --rust: #a0522d; --line: #e4ddd4;
+    --sans: "Avenir Next", "Segoe UI", Helvetica, sans-serif;
+    --serif: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e8e4dc; color: var(--ink); font-family: var(--serif); }
+  .page { max-width: 1320px; margin: 24px auto; background: #fff; padding: 28px 34px 26px;
+    box-shadow: 0 10px 40px rgba(36, 59, 72, 0.12); }
+  header { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 8px 24px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--warm); margin-bottom: 20px; }
+  .kicker { font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px; }
+  h1 { margin: 0; font-size: 34px; font-weight: 600; color: var(--navy); letter-spacing: -0.02em; }
+  .meta { font-family: var(--sans); font-size: 13px; color: #5c656c; text-align: right; line-height: 1.5; }
+  h2 { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy); margin: 0 0 10px; padding-left: 10px; border-left: 3px solid var(--steel); }
+  .help { font-size: 16px; color: #4a4742; margin: 0 0 12px; line-height: 1.4; }
+  .grid { display: grid; grid-template-columns: 0.92fr 1.35fr; gap: 30px; }
+  .search { width: 100%; padding: 10px 12px; font: 16px var(--serif); border: 1px solid #d8d0c6; border-radius: 4px;
+    margin-bottom: 10px; }
+  .catalog { display: flex; flex-wrap: wrap; gap: 8px; max-height: 330px; overflow-y: auto; padding: 2px; }
+  .sport { font: 15px var(--serif); background: var(--paper); color: var(--navy); border: 1px solid var(--warm);
+    border-radius: 18px; padding: 7px 13px; cursor: pointer; transition: background .15s, transform .1s; }
+  .sport small { font-family: var(--sans); font-size: 11px; color: var(--muted); margin-left: 4px; }
+  .sport:hover { background: #ebe5dc; }
+  .sport:active { transform: scale(0.97); }
+  .block { margin-top: 22px; }
+  .history { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; padding: 10px; border: 1px dashed #d8d0c6;
+    border-radius: 6px; background: #fbfaf8; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--steel); color: #fff; border-radius: 18px;
+    padding: 6px 12px; font-size: 15px; cursor: pointer; animation: pop .2s ease-out; }
+  .chip b { font-family: var(--sans); font-size: 11px; font-weight: 600; opacity: .85; }
+  .chip:hover { background: var(--rust); }
+  .empty { color: var(--muted); font-size: 15px; font-style: italic; }
+  .actions { display: flex; gap: 10px; margin-top: 10px; }
+  button.ghost { font: 13px var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--slate);
+    background: #fff; border: 1px solid #cdd6db; border-radius: 4px; padding: 7px 12px; cursor: pointer; }
+  button.ghost:hover { background: #eef2f4; }
+  select { width: 100%; padding: 9px 10px; font: 16px var(--serif); border: 1px solid #d8d0c6; border-radius: 4px; background: #fff; }
+  .counts { font-family: var(--sans); font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card { border: 1px solid #d8d0c6; border-radius: 6px; padding: 14px 16px 12px; }
+  .card h3 { margin: 0; font-family: var(--sans); font-size: 13px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--slate); }
+  .card p.what { margin: 3px 0 10px; font-size: 14px; color: var(--muted); line-height: 1.35; }
+  .row { display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 8px; margin: 7px 0; }
+  .pos { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--navy); text-align: right; }
+  .barbox { position: relative; height: 30px; background: #f6f3ef; border-radius: 3px; overflow: hidden; }
+  .bar { position: absolute; inset: 0 auto 0 0; background: #cfdae0; border-radius: 3px; transition: width .35s ease; }
+  .row.first .bar { background: var(--navy); }
+  .label { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 15.5px; color: var(--navy);
+    white-space: nowrap; }
+  .row.first .label { color: #fff; }
+  .row.zero .label { color: var(--muted); }
+  .row.zero .bar { background: transparent; }
+  .row.real .barbox { outline: 3px solid var(--rust); outline-offset: 1px; }
+  .gap { text-align: center; color: var(--warm); font-size: 18px; line-height: 1; margin: 2px 0 -2px 42px; }
+  .tag { font-family: var(--sans); font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .realpos { margin-top: 8px; font-family: var(--sans); font-size: 13px; color: var(--rust); font-weight: 600; min-height: 18px; }
+  .wait { color: var(--muted); font-style: italic; font-size: 15px; padding: 18px 0; }
+  .finding { margin-top: 20px; background: var(--paper); border-radius: 6px; padding: 14px 18px; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 20px; }
+  .finding strong { display: block; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--slate); margin-bottom: 4px; }
+  .finding span { font-size: 16px; line-height: 1.4; color: var(--navy); }
+  footer { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--warm); font-family: var(--sans); font-size: 12px;
+    color: var(--muted); line-height: 1.5; display: flex; justify-content: space-between; gap: 20px; }
+  .error { padding: 24px; border: 2px solid var(--rust); border-radius: 6px; color: var(--rust); font-size: 18px; }
+  @keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <p class="kicker">Projeto Aplicado III · demonstração local</p>
+      <h1>O próximo treino</h1>
+    </div>
+    <div class="meta">
+      <div><strong>Mesmas contas do documento</strong></div>
+      <div id="fonte">FitRec filtrado · Ni, Muhlstein e McAuley, 2019</div>
+      <div>Banco de Dados · 2026.2</div>
+    </div>
+  </header>
+
+  <div id="app"></div>
+
+  <footer>
+    <span>A ordem das sessões não muda a conta: o modelo usa quantas vezes cada modalidade aparece. Só entram as modalidades do catálogo do FitRec.</span>
+    <span>Demonstração acadêmica. Não é orientação de saúde.</span>
+  </footer>
+</div>
+
+<script src="modelo.js"></script>
+<script>
+const PT = {
+  "bike": "Ciclismo", "run": "Corrida", "mountain bike": "Mountain bike", "bike (transport)": "Bike como transporte",
+  "indoor cycling": "Bike indoor", "walk": "Caminhada", "orienteering": "Orientação", "cross-country skiing": "Esqui cross-country",
+  "core stability training": "Treino de core", "fitness walking": "Caminhada fitness", "skate": "Patinação", "roller skiing": "Esqui sobre rodas",
+  "swimming": "Natação", "hiking": "Trilha", "weight training": "Musculação", "soccer": "Futebol", "tennis": "Tênis",
+  "rowing": "Remo", "kayaking": "Caiaque", "yoga": "Ioga", "aerobics": "Aeróbica", "climbing": "Escalada", "golf": "Golfe",
+  "badminton": "Badminton", "basketball": "Basquete", "treadmill running": "Corrida na esteira", "treadmill walking": "Caminhada na esteira",
+  "circuit training": "Treino em circuito", "downhill skiing": "Esqui alpino", "snowboarding": "Snowboard",
+  "horseback riding": "Hipismo", "kite surfing": "Kitesurf", "sailing": "Vela", "windsurfing": "Windsurf", "dancing": "Dança",
+  "gymnastics": "Ginástica", "martial arts": "Artes marciais", "boxing": "Boxe", "squash": "Squash", "table tennis": "Tênis de mesa",
+  "volleyball": "Vôlei", "beach volleyball": "Vôlei de praia", "handball": "Handebol", "pilates": "Pilates", "rugby": "Rúgbi",
+  "elliptical": "Elíptico", "stair climing": "Escada", "skiing": "Esqui", "snowshoeing": "Raquete de neve", "surfing": "Surfe",
+  "scuba diving": "Mergulho", "running (treadmill)": "Corrida na esteira", "walking": "Caminhada", "cycling": "Ciclismo",
+  "nordic walking": "Caminhada nórdica", "ice skating": "Patinação no gelo", "inline skating": "Patins in-line",
+};
+
+const app = document.getElementById("app");
+
+if (!window.MODELO) {
+  app.innerHTML = '<div class="error">Falta o arquivo <code>app/modelo.js</code>. Na raiz do repositório, rode <code>python3 src/exportar_modelo.py</code>.</div>';
+} else {
+  const M = window.MODELO;
+  const N = M.modalidades.length;
+  const nome = (s) => PT[s] || s.charAt(0).toUpperCase() + s.slice(1);
+  const pct = (v) => (v * 100).toFixed(1).replace(".", ",") + "%";
+  const R = M.resultados;
+  const ordemCatalogo = [...Array(N).keys()].sort((a, b) => M.popularidade[b] - M.popularidade[a]);
+
+  let historico = [];
+  let real = "";
+
+  app.innerHTML = `
+    <div class="grid">
+      <section>
+        <h2>1 · As suas últimas sessões</h2>
+        <p class="help">Toque na modalidade de cada sessão, da mais antiga para a mais recente. Toque numa sessão inserida para tirá-la.</p>
+        <input class="search" id="busca" placeholder="Procurar modalidade" autocomplete="off" />
+        <div class="catalog" id="catalogo"></div>
+        <div class="block">
+          <h2>Sessões inseridas</h2>
+          <div class="history" id="historico"></div>
+          <div class="counts" id="contagem"></div>
+          <div class="actions">
+            <button class="ghost" id="desfazer">Desfazer</button>
+            <button class="ghost" id="limpar">Limpar</button>
+          </div>
+        </div>
+        <div class="block">
+          <h2>3 · Qual foi o treino seguinte?</h2>
+          <p class="help">Opcional. Marque a sessão que a pessoa fez de fato depois, para ver em que posição ela estava em cada lista.</p>
+          <select id="real"><option value="">Ainda não sei</option></select>
+        </div>
+      </section>
+      <section>
+        <h2>2 · Sugestões para a próxima sessão</h2>
+        <div class="cards" id="cards"></div>
+        <div class="finding">
+          <div><strong>No teste com ${R.n_teste} pessoas</strong>
+            <span>A primeira sugestão do hábito acertou ${pct(R.todos_recall1.habito)}; a da vizinhança, ${pct(R.todos_recall1.vizinhanca_itens)}; a da popularidade, ${pct(R.todos_recall1.popularidade)}.</span></div>
+          <div><strong>Quando a pessoa trocou de modalidade · ${R.n_troca} casos</strong>
+            <span>A popularidade acertou ${pct(R.troca_recall1.popularidade)} na primeira posição. O hábito acertou ${pct(R.troca_recall1.habito)}; a vizinhança e a soma, ${pct(R.troca_recall1.vizinhanca_itens)}. Um sorteio entre ${N} modalidades acertaria ${pct(R.aleatorio_recall1)}.</span></div>
+        </div>
+      </section>
+    </div>`;
+
+  const catalogo = document.getElementById("catalogo");
+  const busca = document.getElementById("busca");
+  const selectReal = document.getElementById("real");
+
+  function desenharCatalogo() {
+    const q = busca.value.trim().toLowerCase();
+    catalogo.innerHTML = "";
+    for (const j of ordemCatalogo) {
+      const s = M.modalidades[j];
+      if (q && !nome(s).toLowerCase().includes(q) && !s.includes(q)) continue;
+      const b = document.createElement("button");
+      b.className = "sport";
+      b.innerHTML = nome(s) + (PT[s] ? `<small>${s}</small>` : "");
+      b.onclick = () => { historico.push(j); atualizar(); };
+      catalogo.appendChild(b);
+    }
+  }
+  for (const j of ordemCatalogo) {
+    const o = document.createElement("option");
+    o.value = j;
+    o.textContent = nome(M.modalidades[j]);
+    selectReal.appendChild(o);
+  }
+
+  function contagens() {
+    const h = new Array(N).fill(0);
+    historico.forEach((j) => h[j]++);
+    return h;
+  }
+  const vizinhanca = (h) => M.similaridade.map((row) => row.reduce((acc, s, m) => acc + s * h[m], 0));
+  function soma(h) {
+    const v = vizinhanca(h);
+    const mh = Math.max(...h), mv = Math.max(...v);
+    return h.map((x, i) => (mh > 0 ? x / mh : x) + (mv > 0 ? v[i] / mv : v[i]));
+  }
+  const posicao = (scores, j) => 1 + scores.filter((x) => x > scores[j]).length;
+
+  const LISTAS = [
+    { id: "habito", titulo: "Hábito", what: "As modalidades que a pessoa mais fez.", fn: (h) => h, precisa: true },
+    { id: "vizinhanca", titulo: "Vizinhança de itens", what: "A contagem da pessoa, ponderada pelo cosseno entre modalidades.", fn: vizinhanca, precisa: true },
+    { id: "soma", titulo: "Soma do hábito com a vizinhança", what: "Cada lista dividida pelo próprio máximo, e somadas.", fn: soma, precisa: true },
+    { id: "popularidade", titulo: "Popularidade", what: `A lista global, igual para todos, das ${M.usuarios_no_treino} pessoas do treino.`, fn: () => M.popularidade, precisa: false },
+  ];
+
+  function card(lista, h) {
+    const vazio = lista.precisa && historico.length === 0;
+    let corpo = "";
+    let realTxt = "";
+    if (vazio) {
+      corpo = '<div class="wait">Insira ao menos uma sessão.</div>';
+    } else {
+      const sc = lista.fn(h);
+      const ordem = [...Array(N).keys()].sort((a, b) => sc[b] - sc[a] || M.popularidade[b] - M.popularidade[a]);
+      const top = Math.max(...sc) || 1;
+      const linha = (j) => {
+        const p = posicao(sc, j);
+        const zero = sc[j] <= 0;
+        const cls = ["row", p === 1 && !zero ? "first" : "", zero ? "zero" : "", real !== "" && +real === j ? "real" : ""].join(" ");
+        const w = zero ? 0 : Math.max(4, (sc[j] / top) * 100);
+        return `<div class="${cls}"><div class="pos">${p}º</div><div class="barbox"><div class="bar" style="width:${w}%"></div>` +
+          `<div class="label">${nome(M.modalidades[j])}${zero ? '<span class="tag">empate em zero</span>' : ""}</div></div></div>`;
+      };
+      const cinco = ordem.slice(0, 5);
+      corpo = cinco.map(linha).join("");
+      if (real !== "") {
+        const j = +real;
+        const p = posicao(sc, j);
+        if (!cinco.includes(j)) corpo += '<div class="gap">⋯</div>' + linha(j);
+        realTxt = `Treino seguinte: ${p}º nesta lista${sc[j] <= 0 ? ", empatado em zero" : ""}`;
+      }
+    }
+    return `<div class="card"><h3>${lista.titulo}</h3><p class="what">${lista.what}</p>${corpo}<div class="realpos">${realTxt}</div></div>`;
+  }
+
+  function atualizar() {
+    const h = contagens();
+    const hist = document.getElementById("historico");
+    hist.innerHTML = historico.length
+      ? historico.map((j, i) => `<span class="chip" data-i="${i}" title="Tirar"><b>${i + 1}</b>${nome(M.modalidades[j])}</span>`).join("")
+      : '<span class="empty">Nenhuma sessão ainda.</span>';
+    hist.querySelectorAll(".chip").forEach((c) => (c.onclick = () => { historico.splice(+c.dataset.i, 1); atualizar(); }));
+    const resumo = ordemCatalogo.filter((j) => h[j] > 0).sort((a, b) => h[b] - h[a]).map((j) => `${nome(M.modalidades[j])} ${h[j]}`);
+    document.getElementById("contagem").textContent = historico.length
+      ? `${historico.length} sessões · ${resumo.join(" · ")}`
+      : "";
+    document.getElementById("cards").innerHTML = LISTAS.map((l) => card(l, h)).join("");
+  }
+
+  busca.oninput = desenharCatalogo;
+  selectReal.onchange = () => { real = selectReal.value; atualizar(); };
+  document.getElementById("desfazer").onclick = () => { historico.pop(); atualizar(); };
+  document.getElementById("limpar").onclick = () => { historico = []; real = ""; selectReal.value = ""; atualizar(); };
+  desenharCatalogo();
+  atualizar();
+}
+</script>
+</body>
+</html>

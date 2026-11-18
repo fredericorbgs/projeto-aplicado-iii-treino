@@ -34,7 +34,8 @@ Página da base: https://cseweb.ucsd.edu/~jmcauley/datasets/fitrec.html
 | `docs/etapa-3/` | Documento da etapa 3 |
 | `docs/etapa-4/` | Documento da etapa 4, com resultados e conclusão |
 | `docs/templates/` | Templates oficiais usados na formatação |
-| `src/` | Código que gera as métricas |
+| `src/` | Código que gera as métricas e o modelo da demonstração |
+| `app/` | Demonstração local: abra `app/index.html` no navegador |
 | `resultados/` | Números e figuras citados no documento da etapa 4 |
 | `data/raw/` e `data/processed/` | Vazias de propósito. A base bruta não é versionada |
 
@@ -48,6 +49,10 @@ python3 src/fitrec_poc.py
 ```
 
 A leitura do arquivo remoto leva vários minutos. As métricas já calculadas estão em `resultados/`.
+
+## Demonstração
+
+Abra `app/index.html` no navegador. A pessoa toca nas modalidades das últimas sessões e vê as quatro listas do documento mudarem a cada toque. Não precisa de servidor. Detalhes em `app/README.md`.
 
 ## Vídeos
 

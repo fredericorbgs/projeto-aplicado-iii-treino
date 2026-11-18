@@ -14,3 +14,5 @@ python3 src/fitrec_poc.py
 ```
 
 Biblioteca usada no experimento: Python 3 e numpy.
+
+`exportar_modelo.py` monta o mesmo treino e grava `app/modelo.js`, com a popularidade e o cosseno entre modalidades, para a demonstração local. Antes de gravar, confere as métricas com `resultados/reavaliacao.json`.
